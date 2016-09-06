@@ -1,30 +1,31 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="MyApp" ng-init="sharedValue={name: 'rootScope'}">
+<html lang="en" ng-app="MyApp">
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
+    <link rel="stylesheet" href="./modal.css"/>
 </head>
 <body>
-<p>RootScope value is: {{sharedValue.name}}</p>
-<input type="text" ng-model="sharedValue.name">
-
-<div ng-controller="ParentController1">
-    <p>Parent Controller 1 value is: {{sharedValue.name}}</p>
-    <input type="text" ng-model="sharedValue.name">
-    <div ng-controller="ChildController1">
-        <p>Child Controller 1 value is: {{sharedValue.name}}</p>
-        <input type="text" ng-model="sharedValue.name">
+<div class="overlay" ng-show="isOpened" ng-click="closeModal()"></div>
+<div class="content-wrapper">
+    <div ng-controller="ParentController1">
+        <button class="modal-trigger-button" type="button" ng-click="openModal()">ParentController1's modal</button>
+        <modal-window title="{{title}}" ng-show="isOpened">
+            <p>
+                Although, in a way, the Congressional powers in Article 9 made the "league of states as cohesive and
+                strong as any similar sort of republican confederation in history", the chief problem with the new
+                government under the Articles of Confederation was, in the words of
+            </p>
+        </modal-window>
+        <div ng-controller="ChildController1">
+            <button class="modal-trigger-button" type="button" ng-click="openModal()">ChildController1's modal</button>
+        </div>
     </div>
-    <div ng-controller="ChildController2">
-        <p>Child Controller 2 value is: {{sharedValue.name}}</p>
-        <input type="text" ng-model="sharedValue.name">
+    <div ng-controller="ParentController2">
+        <button class="modal-trigger-button" type="button" ng-click="openModal()">ParentController2's modal</button>
     </div>
-</div>
-<div ng-controller="ParentController2">
-    <p>Parent Controller 2 value is: {{sharedValue.name}}</p>
-    <input type="text" ng-model="sharedValue.name">
 </div>
 </body>
 </html>
