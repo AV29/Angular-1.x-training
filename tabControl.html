@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="tab-control-wrapper">
+    <div class="tabs-wrapper"><a class="tab"
+                                 ng-repeat="tab in tabControl.tabs"
+                                 ng-click="tabControl.switchTab(tab)"
+                                 ng-class="{active: tab.active}">{{tab.name}}</a></div>
+    <div class="pane-content" ng-transclude></div>
+</div>
