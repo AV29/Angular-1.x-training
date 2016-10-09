@@ -1,6 +1,12 @@
 
 angular.module('MyApp', []);
 
+angular.module('MyApp').controller('OuterController',['$http', function($http){
+    var self = this;
+    $http.get('panes.json').then(function(responce){
+        self.panes = responce.data;
+    });
+}]);
 
 angular.module('MyApp')
     .directive('tabControl', function(){
@@ -10,7 +16,7 @@ angular.module('MyApp')
             },
             transclude: true,
             replace: true,
-            templateUrl: 'tabControl.html',
+            templateUrl: 'tab-control.html',
             bindToController: true,
             controllerAs: 'tabControl',
             controller: function() {

@@ -8,13 +8,9 @@
     <link rel="stylesheet" href="tab-controls.css"/>
 </head>
 <body>
-<div class="content-wrapper">
+<div class="content-wrapper" ng-controller="OuterController as outerCtrl">
     <tab-control>
-        <pane name="books"> Books books books</pane>
-        <pane name="reviews">reviews reviews reviews</pane>
-        <pane name="about">about about about</pane>
-        <pane name="test">test test test</pane>
-        <pane name="count">count count count</pane>
+        <pane name="{{pane.name}}" ng-repeat="pane in outerCtrl.panes">{{pane.content}}ффывфывфыв</pane>
     </tab-control>
 </div>
 </body>
