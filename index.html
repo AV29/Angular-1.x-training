@@ -10,7 +10,7 @@
 <body>
 <div class="content-wrapper" ng-controller="OuterController as outerCtrl">
     <tab-control>
-        <pane name="{{pane.name}}" ng-repeat="pane in outerCtrl.panes">{{pane.content}}ффывфывфыв</pane>
+        <pane name="{{pane.name}}" ng-repeat="pane in outerCtrl.panes" on-pane-activated="outerCtrl.informAboutClicked(pane)">{{pane.content}}</pane>
     </tab-control>
 </div>
 </body>

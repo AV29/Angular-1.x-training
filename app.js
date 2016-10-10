@@ -6,6 +6,10 @@ angular.module('MyApp').controller('OuterController',['$http', function($http){
     $http.get('panes.json').then(function(responce){
         self.panes = responce.data;
     });
+
+    self.informAboutClicked = function(tab) {
+        console.log(tab.name);
+    }
 }]);
 
 angular.module('MyApp')
@@ -34,6 +38,7 @@ angular.module('MyApp')
                             eachTab.active = false;
                         }
                     });
+
                     selectedTab.active = true;
                 };
             }
@@ -44,7 +49,8 @@ angular.module('MyApp')
             restrict: 'E',
             require: '^tabControl',
             scope:{
-                name: '@'
+                name: '@',
+                onPaneActivated: '&'
             },
             transclude: true,
             replace: true,
@@ -52,6 +58,10 @@ angular.module('MyApp')
             link: function(scope, element, attrs, tabsCtrl) {
                 scope.active = false;
                 tabsCtrl.register(scope);
+                if(scope.active) {
+                    scope.onPaneActivated(scope);
+                }
+
             }
         }
     });
