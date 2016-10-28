@@ -14,35 +14,13 @@ html, body {
     text-align: center;
 }
 
-.tab-control-wrapper {
+.main-information-wrapper {
     border: 1px solid lightgray;
     width: 100%;
     box-shadow: 0 0 30px grey;
     border-radius: 10px;
 }
 
-.tab-control-wrapper .tabs-wrapper {
-    display: flex;
-}
-
-.tab {
-    flex-grow: 1;
-    cursor: pointer;
-    line-height: 60px;
-    height: 60px;
-    justify-content: center;
-    text-transform: capitalize;
-}
-
-.tab.active {
-    box-shadow: inset 0 0 30px lightgrey;
-}
-
-.pane-content {
-    min-height: 450px;
-    padding: 30px 50px;
-}
-
-.pane-wrapper {
-    line-height: 25px;
+.information-chunk-wrapper {
+    
 }
