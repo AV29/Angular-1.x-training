@@ -4,12 +4,12 @@ angular.module('MyApp', [])
 
         var self = this,
             timeout = 300,
-            styles = getComputedStyle(document.documentElement),
             increment = function () {
                 self.counter += 1;
                 console.log('The actual value of counter is: ' + self.counter);
             },
             fetchViaHttp = function (url) {
+
                 return new Promise(function (resolve, reject) {
 
                     var xhr = new XMLHttpRequest();
