@@ -11,33 +11,34 @@
 <button class="reset" ng-click="dgst.reset()" type="button" name="button">Reset stats!</button>
 <div class="counter">{{dgst.counter}}</div>
 <div class="main-wrapper">
-
-
-<div class="mini-wrapper">
-  <button class="onclick" type="button" name="button">ON click</button>
-  <button ng-click="dgst.ngClickIncrement()" type="button" name="button">NG click</button>
-  <button class="onclick-with-digest" type="button" name="button">ON click with $digest triggering</button>
-</div>
-
-<div class="mini-wrapper">
-  <button ng-click="dgst.setTimeoutIncrement()" type="button" name="button">setTimeout()</button>
-  <button ng-click="dgst.$timeoutIncrement()" type="button" name="button">$timeout</button>
-  <button ng-click="dgst.setTimeoutIncrementWithApply()" type="button" name="button">setTimeout() with $apply triggering</button>
-</div>
-
-<div class="mini-wrapper http-wrapper">
-<div class="http-inner-wrapper">
-  <button ng-click="dgst.fetchViaNativeHttp()" type="button" name="button">Native Http</button>
-  <button ng-click="dgst.fetchVia$http()" type="button" name="button">$http</button>
-  <button ng-click="dgst.fetchViaNativeHttpWithApply()" type="button" name="button">Native Http with $apply triggering</button>
-</div>
-<div class="http-inner-wrapper">
-  <div class="data-wrapper">
-    <span>{{dgst.data.name}}</span>
-    <span>{{dgst.data.surname}}</span>
-    <button ng-if="dgst.data" ng-click="dgst.clearData()" type="button" name="button"><-- Clear Data</button>
-  </div>
-</div>
-</div>
+    <div class="mini-wrapper">
+        <button class="onclick" type="button" name="button">ON click</button>
+        <button ng-click="dgst.ngClickIncrement()" type="button" name="button">NG click</button>
+        <button class="onclick-with-digest" type="button" name="button">ON click with $digest triggering</button>
+    </div>
+    <div class="mini-wrapper">
+        <button ng-click="dgst.setTimeoutIncrement()" type="button" name="button">setTimeout()</button>
+        <button ng-click="dgst.$timeoutIncrement()" type="button" name="button">$timeout</button>
+        <button ng-click="dgst.setTimeoutIncrementWithApply()" type="button" name="button">setTimeout() with $apply
+            triggering
+        </button>
+    </div>
+    <div class="mini-wrapper http-wrapper">
+        <div class="http-inner-wrapper">
+            <button ng-click="dgst.fetchViaNativeHttp()" type="button" name="button">Native Http</button>
+            <button ng-click="dgst.fetchVia$http()" type="button" name="button">$http</button>
+            <button ng-click="dgst.fetchViaNativeHttpWithApply()" type="button" name="button">Native Http with $apply
+                triggering
+            </button>
+        </div>
+        <div class="http-inner-wrapper">
+            <div class="data-wrapper">
+                <span>{{dgst.data.name}}</span>
+                <span>{{dgst.data.surname}}</span>
+                <button ng-if="dgst.data" ng-click="dgst.clearData()" type="button" name="button"><-- Clear Data
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
