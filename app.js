@@ -38,9 +38,7 @@ angular.module('MyApp')
          controller: ['Logger', function(Logger) {
                var self = this;
                self.counter = 0;
-               self.revealCounter = function(){
-                  self.counter = Logger.counter;
-               };        
+               self.Logger = Logger;
         }]
     }
 });
