@@ -1,64 +1,49 @@
 
 angular.module('MyApp', []);
 
-angular.module('MyApp').controller('OuterController',['$http', function($http){
-    var self = this;
-    $http.get('panes.json').then(function(responce){
-        self.panes = responce.data;
-    });
-    self.informAboutClicked = function(tab) {
-        console.log(tab.name);
-    }
-}]);
-
 angular.module('MyApp')
-.directive('tabControl', function(){
+.directive('mainInformation', function(){
     return {
         restrict: 'E',
         scope: {
         },
-        transclude: true,
-        replace: true,
-        templateUrl: 'tab-control.html',
+        templateUrl: 'main-information.html',
         bindToController: true,
-        controllerAs: 'tabControl',
-        controller: function() {
-            var self = this;
-            self.tabs = [];
-            self.register = function register(tab){
-                self.tabs.push(tab);
-                if(self.tabs.length === 1) {
-                    tab.active = true
-                }
-            };
-            self.switchTab = function(selectedTab){
-                angular.forEach(self.tabs, function (eachTab) {
-                    if(eachTab.active && (eachTab != selectedTab)) {
-                        eachTab.active = false;
-                    }
-                });
+        controllerAs: 'mainInformation',
+        controller: ['$rootScope', function($rootScope) {
+           var self = this,
+           	   message = 'message from RootScope eventEmmiter';	
 
-                selectedTab.active = true;
-                selectedTab.onPaneActivated(selectedTab);
-            };
-        }
+           self.pressTheButton = function(){
+           		$rootScope.$broadcast('pressButtonEvent', message);
+           }
+        }]
     }
 })
-.directive('pane', function(){
+.directive('informationChunk', function() {
     return {
         restrict: 'E',
-        require: '^tabControl',
         scope:{
-            name: '@',
-            onPaneActivated: '&'
         },
-        transclude: true,
-        replace: true,
-        template: '<div class="pane-wrapper" ng-show="active" ng-transclude></div>',
-        link: function(scope, element, attrs, tabsCtrl) {
-            scope.active = false;
-            tabsCtrl.register(scope);
-        }
+        templateUrl: 'information-chunk.html',
+        bindToController: true,
+        controllerAs: 'informationChunk',
+         controller: ['$scope', '$interval', function($scope, $interval) {
+           var self = this,
+           	   start = null;
+           $scope.$on('pressButtonEvent', function(event, message){
+
+           	if(start) {
+           	  $interval.cancel(start);
+            }
+           	console.log(message);
+           	self.message = message;
+
+           	start = $interval(function(){self.message = '';}, 1000);
+           });
+
+           
+        }]
     }
 });
 

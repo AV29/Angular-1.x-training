@@ -7,6 +7,10 @@ html, body {
     padding: 0;
     font-family: 'verdana';
 }
+button {
+    display: block;
+    margin: 10px auto;
+}
 
 .content-wrapper {
     width: 1000px;
@@ -14,13 +18,16 @@ html, body {
     text-align: center;
 }
 
-.main-information-wrapper {
+.sub-wrapper {
     border: 1px solid lightgray;
     width: 100%;
     box-shadow: 0 0 30px grey;
     border-radius: 10px;
+    padding: 50px;
+    margin-bottom: 20px;
 }
 
-.information-chunk-wrapper {
-    
+.recieved-message {
+    margin: 10px 0;
 }
+
