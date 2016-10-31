@@ -4,6 +4,7 @@ angular.module('MyApp', [])
 
         var self = this,
             timeout = 300,
+            styles = getComputedStyle(document.documentElement),
             increment = function () {
                 self.counter += 1;
                 console.log('The actual value of counter is: ' + self.counter);
@@ -30,13 +31,25 @@ angular.module('MyApp', [])
                         };
                     };
                 });
+            },
+            setDocumentVariable = function (propertyName, value) {
+                document.documentElement.style.setProperty(propertyName, value);
             };
 
         this.counter = 0;
 
+        this.changeColorTheme = function()
+        {
+            var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+            setDocumentVariable('--primaryColor', randomColor);
+            setDocumentVariable('--secondaryColor', randomColor);
+        }
+        ;
+
         this.clearData = function () {
             self.data = null;
-        }
+        };
 
         this.reset = function () {
             self.counter = 0;
