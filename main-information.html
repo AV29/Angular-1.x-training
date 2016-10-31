@@ -1,4 +1,7 @@
 <div class="sub-wrapper">
-	This is main information about App!
-	<button ng-click="mainInformation.pressTheButton()"> Press me to send DOWNwards! </button>
+	This is a component!
+	<div><button ng-click="mainInformation.incrementCounterInService()"> Press me to increment service's counter! </button>
+	<button ng-click="mainInformation.resetCounter()"> Reset services counter! </button>
+	</div>
+	<div>counter: <span ng-if="mainInformation.counter">{{mainInformation.counter}}</span></div>
 </div>

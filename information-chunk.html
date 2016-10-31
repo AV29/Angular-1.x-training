@@ -1,7 +1,7 @@
 <div class="sub-wrapper">
-<button ng-click="mainInformation.pressTheButton()"> Press me to send UPwards! </button>
-	....a piece of information...
-	<p class="recieved-message">
-		{{informationChunk.message}}
-	</p>
+	This is a whole different component!
+	<div>
+		<button ng-click="informationChunk.revealCounter()"> Press me to see what's the counter in service is! </button>
+		<div ng-if="informationChunk.counter">{{informationChunk.counter}}</div>
+	</div>
 </div>

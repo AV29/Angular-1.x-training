@@ -1,5 +1,5 @@
 
-angular.module('MyApp', []);
+angular.module('MyApp', ['LogService']);
 
 angular.module('MyApp')
 .directive('mainInformation', function(){
@@ -10,13 +10,20 @@ angular.module('MyApp')
         templateUrl: 'main-information.html',
         bindToController: true,
         controllerAs: 'mainInformation',
-        controller: ['$rootScope', function($rootScope) {
+        controller: ['Logger', function( Logger) {
            var self = this,
-           	   message = 'message from RootScope eventEmmiter';	
+               message = 'Hello!!!';
+               this.counter = Logger.counter;
+               self.incrementCounterInService = function() {
+                  Logger.logOut(message);
+                  Logger.counter++;
+                  self.counter = Logger.counter;
+               }
 
-           self.pressTheButton = function(){
-           		$rootScope.$broadcast('pressButtonEvent', message);
-           }
+            self.resetCounter = function(){
+                Logger.counter = 0;
+                self.counter = Logger.counter;
+            }
         }]
     }
 })
@@ -28,21 +35,12 @@ angular.module('MyApp')
         templateUrl: 'information-chunk.html',
         bindToController: true,
         controllerAs: 'informationChunk',
-         controller: ['$scope', '$interval', function($scope, $interval) {
-           var self = this,
-           	   start = null;
-           $scope.$on('pressButtonEvent', function(event, message){
-
-           	if(start) {
-           	  $interval.cancel(start);
-            }
-           	console.log(message);
-           	self.message = message;
-
-           	start = $interval(function(){self.message = '';}, 1000);
-           });
-
-           
+         controller: ['Logger', function(Logger) {
+               var self = this;
+               self.counter = 0;
+               self.revealCounter = function(){
+                  self.counter = Logger.counter;
+               };        
         }]
     }
 });
