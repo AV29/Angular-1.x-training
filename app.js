@@ -1,18 +1,102 @@
 
 angular.module('MyApp', [])
 
-.controller('ParentController1', function ParentController1($scope){
+.controller('DigestTaskController', function DigestTaskController($scope, $timeout, $http){
 
-})
+  var self = this,
+      timeout = 300,
+      increment = function(){
+        self.counter += 1;
+        console.log('The actual value of counter is: ' + self.counter);
+      },
+      fetchViaHttp = function(url) {
+        return new Promise(function (resolve, reject) {
 
-.controller('ParentController2', function ParentController2($scope){
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', url, true);
+          xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+          xhr.send();
 
-})
+          xhr.onload = function() {
+              if (this.status == 200) {
+                  var responseData = JSON.parse(this.responseText);
+                  resolve(responseData);
+              } else {
+                  var error = new Error(this.statusText);
+                  error.code = this.status;
+                  reject(error);
+              }
+              xhr.onerror = function() {
+                  reject(new Error("Network Error"));
+              };
+          };
+        });
+      };
 
-.controller('ChildController1', function ChildController1($scope){
+  this.counter = 0;
 
-})
+  this.clearData = function() {
+    self.data = null;
+  }
 
-.controller('ChildController2', function ChildController2($scope){
+  this.reset = function() {
+    self.counter = 0;
+    if(self.data) {
+        self.data = null;
+    }
+  };
 
+  document.querySelector('.onclick').addEventListener('click', function(){
+    increment();
+  });
+
+  document.querySelector('.onclick-with-digest').addEventListener('click', function(){
+    $scope.$apply(function(){
+        increment();
+    });
+  });
+
+  this.ngClickIncrement = function() {
+    increment();
+  };
+
+  this.setTimeoutIncrement = function() {
+    setTimeout(increment, timeout);
+  };
+
+  this.$timeoutIncrement = function() {
+    $timeout(increment, timeout);
+  };
+
+  this.setTimeoutIncrementWithApply = function() {
+    setTimeout(function(){
+        $scope.$apply(function(){
+          increment();
+        })
+    }, timeout);
+  };
+
+  this.fetchViaNativeHttp = function() {
+    fetchViaHttp('data.json').then(function(responce) {
+      self.data = responce;
+      increment();
+    });
+  };
+
+  this.fetchVia$http = function() {
+    $http.get('data.json').then(function(responce) {
+      self.data = responce.data;
+      increment();
+  });
+  };
+
+  this.fetchViaNativeHttpWithApply = function() {
+    fetchViaHttp('data.json').then(function(responce) {
+
+      $scope.$apply(function(){
+        self.data = responce;
+        increment();
+      });
+    });
+  };
 });

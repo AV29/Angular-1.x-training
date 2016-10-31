@@ -1,0 +1,55 @@
+.mini-wrapper {
+  border: 1px solid lightgrey;
+  margin-bottom: 5px;
+  padding: 10px;
+  min-height: 100px;
+  text-align: left;
+}
+
+.main-wrapper {
+  width: 1000px;
+  margin: 20px auto;
+}
+
+body {
+  text-align: center;
+  margin-top: 200px;
+}
+
+button {
+  margin-bottom: 5px;
+  display: inline-block;
+  padding: 5px;
+  min-width: 350px;
+}
+
+.mini-wrapper button {
+  display: block;
+}
+
+.counter {
+ font-size: 200%;
+ margin-top: 10px;
+}
+
+.http-wrapper {
+  display: flex;
+}
+
+.http-inner-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.data-wrapper {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+}
+
+.data-wrapper button {
+  margin-left: 10px;
+  display: inline-block;
+  min-width: auto;
+}
