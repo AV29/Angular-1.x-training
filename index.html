@@ -9,16 +9,32 @@
     integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
     crossorigin="anonymous">
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<script src="lib/select.js"></script>
 
 <script type="text/javascript" src="app.js"></script>
 
 <link rel="stylesheet" href="digest.css" media="screen" title="no title">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link href="lib/select.css" rel="stylesheet" />
 </head>
 <body ng-controller="MainController as ctrl">
-    <select class="js-example-basic-single" style="width: 50%" ng-options="item.value as item.name for item in ctrl.states">
-    </select>
+<div id="select" class="select">
+    <input class="input" type="hidden" name="" value="">
+    <button>
+        <span class="trigger-text">Select</span>
+        <span class="caret"></span>
+    </button>
+    <ul>
+        <li ng-repeat="state in ctrl.states" value="{{state.value}}">{{state.name}}</li>
+    </ul>
+</div>
+
+<input ng-model="ctrl.valueToSet"/>
+<button ng-click="ctrl.setValue(ctrl.valueToSet)">SET to {{ctrl.valueToSet}}</button>
+
+<button ng-click="ctrl.getValue()">GET Current Value</button>
+<p> Label: {{ ctrl.currentValue.label }} </p>
+<p> index: {{ ctrl.currentValue.index }} </p>
+<p> value: {{ ctrl.currentValue.value }} </p>
 </body>
 </html>
 
