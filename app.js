@@ -1,3 +1,5 @@
+//http://www.jqueryscript.net/demo/Simple-Animated-jQuery-Select-Menu-Plugin-Select-Extended/
+
 angular.module('MyApp', [])
 
 .controller('MainController', function MainController($http, $timeout, $scope) {
