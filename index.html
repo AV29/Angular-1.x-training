@@ -4,37 +4,26 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-    <script
-    src="https://code.jquery.com/jquery-3.1.1.min.js"
-    integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-    crossorigin="anonymous">
-</script>
-<script src="lib/select.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="lib/select.js"></script>
 
-<script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 
-<link rel="stylesheet" href="digest.css" media="screen" title="no title">
-<link href="lib/select.css" rel="stylesheet" />
+    <link rel="stylesheet" href="dropdown.css" media="screen" title="no title">
 </head>
 <body ng-controller="MainController as ctrl">
-<div id="select" class="select">
-    <input class="input" type="hidden" name="" value="">
-    <button>
-        <span class="trigger-text">Select</span>
-        <span class="caret"></span>
-    </button>
-    <ul>
-        <li ng-repeat="state in ctrl.states" value="{{state.value}}">{{state.name}}</li>
-    </ul>
+<div class="main-wrapper">
+    <div class="title-wrapper">
+        <p class="title" ng-class="{'show-message':ctrl.isErrorMessageShown}" ng-if="!ctrl.isErrorMessageShown">{{ctrl.selectedValue}}</p>
+    </div>
+    <input ng-model="ctrl.valueToSet" placeholder="Enter state name" class="state-name-input"/>
+    <button ng-click="ctrl.setValue(ctrl.valueToSet)" class="search-button"><span>GO FIND </span>{{ctrl.valueToSet}}</button>
+
+    <dropdown data="ctrl.states" selected-value="ctrl.selectedValue"
+              show-error-message="ctrl.showMessage(isShown)"></dropdown>
+
+    <p class="error-message" ng-class="{'show-message':ctrl.isErrorMessageShown}"> There's no such a state in USA. {{ctrl.selectedValue}} not found!</p>
 </div>
-
-<input ng-model="ctrl.valueToSet"/>
-<button ng-click="ctrl.setValue(ctrl.valueToSet)">SET to {{ctrl.valueToSet}}</button>
-
-<button ng-click="ctrl.getValue()">GET Current Value</button>
-<p> Label: {{ ctrl.currentValue.label }} </p>
-<p> index: {{ ctrl.currentValue.index }} </p>
-<p> value: {{ ctrl.currentValue.value }} </p>
 </body>
 </html>
 

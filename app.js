@@ -2,49 +2,88 @@
 
 angular.module('MyApp', [])
 
-.controller('MainController', function MainController($http, $timeout, $scope) {
+    .directive('dropdown', function () {
+        return {
+            restrict: 'E',
+            scope: {
+                data: '<',
+                selectedValue: '=',
+                showErrorMessage: '&'
+            },
+            templateUrl: 'dropdown.html',
+            replace: true,
+            bindToController: true,
+            controllerAs: 'ddl',
+            link: function (scope) {
+                var self = this;
+                scope.$watch(function(){
+                                return scope.ddl.data;
+                            },
+                    function(newVal, oldVal, scope){
+                        if(oldVal === newVal){
+                            return;
+                        }
+                        $("#select").selectX({
+                                onSelect: function (selectedVal) {
 
-    var self = this;
+                                    scope.$apply(function () {
+                                        scope.ddl.selectedValue = selectedVal.label;
+                                    });
+                                }
+                        });
+                });
 
-    this.valueToSet = '';
-    this.currentValue = {};
-
-    $http.get('states.json').then(function(response){
-        self.states = response.data;
-        $timeout(function(){
-            $("#select").selectX({
-                onSelect: function (selectedVal) {
-
-                   self.currentValue = {};
-                    $scope.$apply(function(){
-                        Object.assign(self.currentValue, selectedVal);
+                scope.$watch(function(){
+                        return scope.ddl.selectedValue;
+                    },
+                    function(newVal, oldVal, scope){
+                        if(oldVal === newVal){
+                            return;
+                        }
+                       scope.ddl.setValue(newVal, oldVal);
                     });
-                    console.log(selectedVal);
-                }
-            });
-        }, 0);
+            },
+            controller: function () {
+                var self = this;
+                this.recordFound = true;
+
+                this.setValue = function (value, oldValue) {
+                    if(!value) {
+                        return;
+                    }
+                    var $input = $('#select .input'),
+                        $text = $('.trigger-text'),
+                        $targetLi = $("#select ul li[value=" + value + "]");
+                    if(!$targetLi.length) {
+                        self.showErrorMessage({isShown: true});
+                        return;
+                    }
+                    self.showErrorMessage({isShown: false});
+                    $input.val(value);
+                    $text.text($targetLi.text());
+                    $targetLi.addClass("selected").siblings().removeClass("selected");
+                };
+
+            }
+        }
+    })
+
+    .controller('MainController', function MainController($http, $scope) {
+        var self = this;
+        this.selectedValue = '';
+        this.valueToSet = '';
+        this.isErrorMessageShown = false;
+        $http.get('states.json').then(function (response) {
+            self.states = response.data;
+        });
+        this.setValue = function(val) {
+            if(val) {
+                self.selectedValue = val;
+            }
+        };
+
+        this.showMessage = function(isShown) {
+            self.isErrorMessageShown = isShown;
+        };
     });
-
-    this.setValue = function(value) {
-            var $input = $('#select .input'),
-                $text = $('.trigger-text'),
-                $targetLi = $("#select ul li[value=" + value + "]");
-            // set input value
-            $input.val(value);
-
-            // change trigger text and change item class
-            $text.text($targetLi.text());
-            $targetLi.addClass("selected").siblings().removeClass("selected");
-
-        self.currentValue = {
-                label: $targetLi.text(),
-                value: value
-            };
-    };
-
-    this.getValue = function() {
-        console.log(self.currentValue);
-        return self.currentValue;
-    }
-});
 

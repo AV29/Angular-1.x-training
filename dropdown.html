@@ -1,0 +1,11 @@
+<div id="select" class="select">
+
+    <input class="input" type="hidden" name="" value="">
+    <button>
+        <span class="trigger-text">Select</span>
+        <span class="caret"></span>
+    </button>
+    <ul>
+        <li ng-repeat="state in ddl.data" value="{{state.name}}">{{state.name}}</li>
+    </ul>
+</div>

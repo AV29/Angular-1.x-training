@@ -1,0 +1,147 @@
+:root {
+    --shadowColor: lightgrey;
+}
+
+#select {
+    width: 300px;
+    margin: 50px auto;
+    display: block;
+}
+
+#select button {
+    padding: 7px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+button, input {
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid var(--shadowColor);
+    box-shadow: 0 0 10px var(--shadowColor);
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.title-wrapper {
+    min-height: 100px;
+    font-size: 1.8rem;
+}
+
+.title-wrapper.show-message {
+
+}
+
+html, body, p {
+    margin: 0;
+    padding: 0;
+}
+
+.state-name-input {
+    padding: 10px;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.main-wrapper {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.search-button {
+    padding: 10px;
+    min-width: 150px;
+    margin-left: -4px;
+    border-left: none;
+}
+
+.search-button span{
+    color: grey;
+}
+
+.error-message {
+    visibility: hidden;
+    color: transparent;
+    transition: all 0.7s ease-out;
+}
+
+.error-message.show-message {
+    visibility: visible;
+    color: tomato;
+}
+
+.jq-selectx ul.open {
+    display: block;
+    max-height: 200px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.jq-selectx ul {
+    display: none;
+}
+
+.jq-selectx {
+    position: relative;
+    display: inline-block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.jq-selectx button {
+    position: relative;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #fff;
+    width: 100%;
+    text-align: left;
+}
+
+.jq-selectx ul {
+    width: 100%;
+    position: absolute;
+    z-index: 10;
+    border: 1px solid #ccc;
+    border-top: none;
+    background-color: #fff;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.jq-selectx ul li {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.jq-selectx ul li:hover {
+    background-color: #efefef;
+}
+
+.jq-selectx ul li.selected {
+    background-color: #efefef;
+}
+
+.jq-selectx .caret {
+    position: absolute;
+    top: 12px;
+    right: 7px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 5px dashed;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+}
