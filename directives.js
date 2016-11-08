@@ -11,7 +11,7 @@ angular.module('MyApp')
             replace: true,
             bindToController: true,
             controllerAs: 'ddl',
-            link: function (scope) {
+            link: function (scope, elem) {
                 var self = this;
                 scope.$watch(function () {
                         return scope.ddl.data;
@@ -20,7 +20,7 @@ angular.module('MyApp')
                         if (oldVal === newVal) {
                             return;
                         }
-                        $("#select").selectX({
+                        $(elem).selectX({
                             onSelect: function (selectedVal) {
 
                                 scope.$apply(function () {
